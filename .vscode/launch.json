@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Celery Worker",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/myenv/bin/celery",
+      "args": [
+        "-A",
+        "celery_app",
+        "worker",
+        "--loglevel=info",
+        "--concurrency=1",
+        "--pool=solo"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}",
+        "CELERY_BROKER_URL": "redis://localhost:6379/0",
+        "CELERY_RESULT_BACKEND": "redis://localhost:6379/0"
+      },
+      "justMyCode": false,
+      "stopOnEntry": false
+    }
+  ]
+}

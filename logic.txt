@@ -1,0 +1,63 @@
+
+# Extrapolate logic:
+
+We have these data:
+Last Hour Report period = 22:56 → 23:56                              
+Store records  
+    22:40 active, 
+    23:20 inactive, 
+    23:50 active 
+
+
+    most_recent_record_before_period = 22:40 active
+    most_recent_record_at_end = 23:50 active
+
+
+    Records between 22:56 → 23:56
+    23:20 inactive
+    23:50 active
+
+    Our first record starts at 23:20 but period begins at 22:56. That means we have a gap of 24 minutes. 22:56 → 23:20 (24 minutes)
+    So, we have to fill the gap between 22:56 → 23:20. With the most recent record before this period. The most recent record before this period is 22:40 active. So, uptime_last_hour = 24 minutes.
+
+    Now, We will handle the records between 23:20 → 23:56. 
+    We have two records:
+    23:20 inactive
+    23:50 active
+
+    From 23:20 → 23:50, the store was inactive. So, downtime_last_hour = 30 minutes.
+
+    Again, from 23:50 → 23:56, the store was active. So, uptime_last_hour = 6 minutes.
+
+    So, uptime_last_hour = 24 + 6 = 30 minutes, downtime_last_hour = 30 minutes.
+
+
+
+
+
+# Business Hours Calculation Logic:
+
+Two Cases: 
+1. Normal hours (e.g., 10:00 AM to 9:00 PM) for a day
+2. Overnight hours (e.g., 10:00 PM to 6:00 AM next day) for a day
+
+Case 1: Normal hours (e.g., 10:00 AM to 9:00 PM) for a day
+ Business open = 10:00 AM, Business close = 9:00 PM
+ Start time local =  2024-10-14 16:00, End time local = 2024-10-14 18:30 
+
+ So, Case 1 applies here. Total number of minutes = 150 minutes
+
+Case 2: Overnight hours (e.g., 10:00 PM to 6:00 AM next day) for a day
+ Business open = 10:00 PM, Business close = 6:00 AM
+ Start time local =  2024-10-14 22:00, End time local = 2024-10-15 06:00
+
+ We will split it into two parts:
+ 1. Evening Segment: 22:00 → 23:59 (2 hours)
+ 2. Morning Segment: 00:00 → 06:00 (6 hours)
+ 
+ So, Case 2 applies here. Total number of minutes = 2 + 6 = 8 hours = 8 * 60 = 480 minutes
+ 
+ 
+
+
+
