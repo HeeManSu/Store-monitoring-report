@@ -10,6 +10,10 @@ backend service that tracks store uptime and downtime, handles large CSV imports
 
 - **Report Generation:** ~28 sec
 
+## Links
+You can check out the [report CSV here](https://drive.google.com/file/d/13RB9aqzx5k7ytYou3jeIVsETf2h8_XSc/view?usp=sharing) and watch the [video walkthrough here](https://www.loom.com/share/68e74602db3d42b88869972b8e50ae25?sid=826e9b66-cb9d-4573-a958-69260cd80cff).
+
+
 ## API Endpoints
 
 ### 1. Trigger Report Generation
